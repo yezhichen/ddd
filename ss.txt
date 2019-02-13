@@ -1,0 +1,84 @@
+ //设置图片在下载期间显示的图片
+ 2     showStubImage(R.drawable.ic_launcher)
+ 3     
+ 4     //设置图片Uri为空或是错误的时候显示的图片
+ 5     showImageForEmptyUri(R.drawable.ic_empty)
+ 6     
+ 7     //设置图片加载/解码过程中错误时候显示的图片
+ 8     showImageOnFail(R.drawable.ic_error)
+ 9     
+10     //设置图片在下载前是否重置，复位
+11     resetViewBeforeLoading()
+12     
+13     //设置下载的图片是否缓存在内存中
+14     cacheInMemory()
+15     
+16     //设置下载的图片是否缓存在SD卡中
+17     cacheOnDisc()
+18     
+19     //设置图片的解码类型
+20     bitmapConfig(Bitmap.Config.RGB_565)
+21     
+22     //设置图片的解码配置
+23     decodingOptions(android.graphics.BitmapFactory.Options decodingOptions)
+24     
+25     //设置图片下载前的延迟
+26     delayBeforeLoading(int delayInMillis) 
+27     
+28     //设置额外的内容给ImageDownloader
+29     extraForDownloader(Object extra)
+30     
+31     //设置图片加入缓存前，对bitmap进行设置
+32     preProcessor(BitmapProcessor preProcessor)
+33     
+34     //设置显示前的图片，显示后这个图片一直保留在缓存中
+35     postProcessor(BitmapProcessor postProcessor) 
+36     
+37     //设置图片以如何的编码方式显示
+38     imageScaleType(ImageScaleType imageScaleType)
+
+ 
+ 
+　　　　　
+　　　　　　　2.此类的两种创建方式:
+
+        /**
+         * DisplayImageOptions 创建的两种方式。
+         */
+        // 创建默认的DisplayImageOptions
+        DisplayImageOptions option_0 = DisplayImageOptions.createSimple();
+
+        // 使用DisplayImageOptions.Builder()创建DisplayImageOptions
+        DisplayImageOptions option_1 = new DisplayImageOptions.Builder()
+                .showStubImage(R.drawable.ic_launcher)
+                .showImageOnFail(R.drawable.ic_error)
+                .showImageForEmptyUri(R.drawable.ic_empty).cacheInMemory()
+                .cacheOnDisc().displayer(new RoundedBitmapDisplayer(20))
+                .build();
+
+　　　　　　3.类中的方法使用：
+
+     /**
+     * 设置图片的显示方式
+     * @param displayer 
+     */
+    displayer(BitmapDisplayer displayer)
+    displayer：
+              RoundedBitmapDisplayer（int roundPixels）设置圆角图片
+              FakeBitmapDisplayer（）这个类什么都没做
+              FadeInBitmapDisplayer（int durationMillis）设置图片渐显的时间
+　　　　　　　  SimpleBitmapDisplayer()正常显示一张图片　　
+　　　 
+
+
+/**
+ * 图片的缩放方式
+ * @param imageScaleType
+ */
+    imageScaleType(ImageScaleType imageScaleType)
+    imageScaleType:
+                   EXACTLY :图像将完全按比例缩小的目标大小
+                   EXACTLY_STRETCHED:图片会缩放到目标大小完全
+                   IN_SAMPLE_INT:图像将被二次采样的整数倍
+                   IN_SAMPLE_POWER_OF_2:图片将降低2倍，直到下一减少步骤，使图像更小的目标大小
+                   NONE:图片不会调整
